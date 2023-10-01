@@ -1,0 +1,54 @@
+import tensorflow as tf
+from matplotlib import pyplot as plt
+import numpy as np
+from tensorflow.keras.datasets import mnist
+from matplotlib import pyplot as plt
+
+(trainX, trainy), (testX, testy) = mnist.load_data()
+
+print("Train: X=%s, y=%s"  % (trainX.shape, trainy.shape))
+print('Test: X=%s, y=%s ' % (testX.shape, testy.shape))
+
+for i in range(9): 
+   plt.subplot(330 + 1 + i)
+   plt.imshow(trainX[i], cmap=plt.get_cmap("gray"))
+plt.show()
+
+(x_train,y_train),(x_test,y_test)=tf.keras.datasets.mnist.load_data()
+x_train.shape == (60000,28,28)
+y_train.shape == (10000,28,28)
+x_test.shape ==(60000,)
+y_train=tf.keras.utils.to_categorical(y_train,10)
+y_test.shape==(10000,)
+y_test=tf.keras.utils.to_categorical(y_test,10)
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,Flatten
+model=Sequential()
+input_layer=Flatten(input_shape=(28,28))
+
+model.add(input_layer)
+layer1=Dense(128,activation="relu")
+model.add(layer1)
+layer2=Dense(128,activation="relu")
+model.add(layer2)
+output_layer=Dense(10,activation="softmax")
+model.add(output_layer)
+
+model.compile(optimizer="adam",metrics="accuracy",loss="categorical_crossentropy")
+
+model.summary()
+
+model.fit(x_train,y_train)
+
+model.evaluate(x_test,y_test)
+
+x_test[77].shape
+
+import matplotlib.pyplot as plt
+img = np.reshape(x_train[9], (28,28))
+plt.imshow(img)
+
+y_test[10]
+
+y_train[77]
